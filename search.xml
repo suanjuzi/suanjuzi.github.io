@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<search>
+  <entry>
+    <title>Hello World</title>
+    <url>/2021/03/31/hello-world/</url>
+    <content><![CDATA[<p>Welcome to <a href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
+<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure>
+
+<p>More info: <a href="https://hexo.io/docs/writing.html">Writing</a></p>
+<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
+
+<p>More info: <a href="https://hexo.io/docs/server.html">Server</a></p>
+<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
+
+<p>More info: <a href="https://hexo.io/docs/generating.html">Generating</a></p>
+<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
+
+<p>More info: <a href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
+]]></content>
+  </entry>
+  <entry>
+    <title>什么是单例模式，单例模式的优点，饿汉和懒汉式单例模式的区别</title>
+    <url>/2021/03/31/%E4%BB%80%E4%B9%88%E6%98%AF%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F%EF%BC%8C%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F%E7%9A%84%E4%BC%98%E7%82%B9%EF%BC%8C%E9%A5%BF%E6%B1%89%E5%92%8C%E6%87%92%E6%B1%89%E5%BC%8F%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F%E7%9A%84%E5%8C%BA%E5%88%AB/</url>
+    <content><![CDATA[<h1 id="什么是单例模式"><a href="#什么是单例模式" class="headerlink" title="什么是单例模式"></a>什么是单例模式</h1><p>单例模式是一种设计模式，是创建式模式的一种。它确保了一个类有且只有一个对象存在。<br>单例模式的定义：<br>1：定义私有的静态成员变量private static<br>2：私有化构造函数private<br>3：提供一个公有的的静态方法以便构造实例public static</p>
+<h1 id="单例模式的优点和适用场景"><a href="#单例模式的优点和适用场景" class="headerlink" title="单例模式的优点和适用场景"></a>单例模式的优点和适用场景</h1><p>优点：<br>1：避免了频繁的创建和销毁对象，减少了系统开销<br>2：节省了内存空间，且内存中只有一个对象<br>3：提供了一个全局访问点<br>适用场景：<br>1：针对某些需要频繁创建和删除对象的情景<br>2：需要频繁的创建对象，但对象创建需要大量的开销<br>3：某些确实只能有一个对象的情景，如某些核心交易类，就只许有一个对象</p>
+<h1 id="饿汉式和懒汉式单例模式区别"><a href="#饿汉式和懒汉式单例模式区别" class="headerlink" title="饿汉式和懒汉式单例模式区别"></a>饿汉式和懒汉式单例模式区别</h1><p>饿汉式：在单例类被加载时，就直接实例化一个对象<br>不关用不用的上，加载时就创建实例，浪费了空间，但是用的时候不需要判断是否需要创建实例，节约了判断的时间<br>属于空间换时间</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">...</span><br><span class="line"><span class="keyword">private</span> <span class="keyword">static</span> Singleton instance=<span class="keyword">new</span> Singleton();</span><br><span class="line">...</span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> Singleton <span class="title">getInstance</span><span class="params">()</span></span>&#123;</span><br><span class="line"><span class="keyword">return</span> instance;</span><br><span class="line">&#125;</span><br><span class="line">...</span><br></pre></td></tr></table></figure>
+
+<p>懒汉式：单例类被加载时，先不实例化一个对象，在公有的静态方法被调用时，才会实例化一个对象<br>JVM加载完之后并不会创建实例，节省了空间，但是在每次获取实例的时候都要进行一次判断，看是否需要创建实例，浪费了时间<br>属于时间换空间</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">...</span><br><span class="line"><span class="keyword">private</span> <span class="keyword">static</span> Singleton;</span><br><span class="line">...</span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">synchronized</span> Singleton <span class="title">getInstance</span><span class="params">()</span></span>&#123;</span><br><span class="line"><span class="keyword">if</span>(instance==<span class="keyword">null</span>)instance=<span class="keyword">new</span> SIngleton();</span><br><span class="line">&#125;</span><br><span class="line">...</span><br></pre></td></tr></table></figure>
+<p>而且由于懒汉式在加载类的时候并不创建实例，因此在真正创建实例时，有可能引发多线程并发问题，本来单例模式保证只有一个实例，由于多线程调用的问题，创建出多个实例来，导致单例模式失效。<br>因此，在公有静态方法上加了个synchronized(同步)关键字来保证线程安全，同一时间只有一个线程能访问该方法。<br>但紧接着问题又出现了，直接在方法上加锁确实简单，但也进一步加大了开销，拉低了整个实例的访问速度。</p>
+<h1 id="改进"><a href="#改进" class="headerlink" title="改进"></a>改进</h1><p>方法：双重检查加锁<br>1：加volatile关键字，保证本地线程不会缓存该变量，变量的读写直接在共享内存中，这样使多线程读到的变量都是正确的<br>2：将synchronized(同步)关键字移入方法内部使用，当方法调用时，先检查是否需要创建实例，如果实例已经存在，直接返回实例，不需要使用同步关键字，如果实例不存在，则进入同步关键字判断，将判断实例是否存在的步骤再进行一遍。<br>在此过程中，检查了两次实例是否存在，还使用了同步关键字加锁，因此被叫做双重检查加锁</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">...</span><br><span class="line"><span class="keyword">private</span> <span class="keyword">volatile</span>  <span class="keyword">static</span> Singleton instance=<span class="keyword">null</span>;</span><br><span class="line">...</span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> Singleton <span class="title">getInstance</span><span class="params">()</span></span>&#123;</span><br><span class="line"><span class="keyword">if</span>(instance==<span class="keyword">null</span>)</span><br><span class="line">	<span class="keyword">synchronized</span>(Singleton.class)</span><br><span class="line">	<span class="keyword">if</span>(instance==<span class="keyword">null</span>)instance=<span class="keyword">new</span> Singleton();</span><br><span class="line"><span class="keyword">return</span> instance;	</span><br><span class="line">	&#125;</span><br><span class="line">...</span><br></pre></td></tr></table></figure>
+<p>这样保证了线程的安全，而且只有第一次实现实例的时候会同步，减小了性能开销</p>
+]]></content>
+  </entry>
+  <entry>
+    <title>操作系统进程</title>
+    <url>/2021/03/31/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E7%AC%AC%E4%BA%8C%E7%AB%A0%20%E8%BF%9B%E7%A8%8B%E5%92%8C%E4%B8%AD%E6%96%AD/</url>
+    <content><![CDATA[<h1 id="进程是什么"><a href="#进程是什么" class="headerlink" title="进程是什么"></a>进程是什么</h1><p>进程是某个允许并发执行的程序在某个数据集合上的执行过程</p>
+<h1 id="进程和程序的区别"><a href="#进程和程序的区别" class="headerlink" title="进程和程序的区别"></a>进程和程序的区别</h1><p>进程是动态的过程，存在比较短暂，程序是静态的，是永久存在的<br>一个进程可以对应许多个程序，一个程序也可以有多个进程</p>
+<h1 id="进程控制块"><a href="#进程控制块" class="headerlink" title="进程控制块"></a>进程控制块</h1><p>进程控制块是进程实体的一部分，是记录性的数据结构<br>存在着进程标识符信息、处理机状态信息、进程调度信息和进程控制信息</p>
+<h1 id="进程的三种基本状态"><a href="#进程的三种基本状态" class="headerlink" title="进程的三种基本状态"></a>进程的三种基本状态</h1><p>就绪态、运行态、阻塞态<br>就绪态的进程除了cpu的时间片之外，其他资源已经准备好了<br>运行态是指正在运行的进程<br>阻塞态是指正在等待事件发生的进程</p>
+<h1 id="进程状态转换"><a href="#进程状态转换" class="headerlink" title="进程状态转换"></a>进程状态转换</h1><h2 id="进程创建"><a href="#进程创建" class="headerlink" title="进程创建"></a>进程创建</h2><p>申请空白的进程控制块<br>为新进程分配资源<br>初始化进程控制块<br>将进程插入就绪队列</p>
+<h2 id="进程阻塞"><a href="#进程阻塞" class="headerlink" title="进程阻塞"></a>进程阻塞</h2><p>暂停进程的运行<br>将进程状态改为阻塞态<br>将进程插入阻塞队列<br>重新进行程序调度</p>
+<h2 id="进程唤醒"><a href="#进程唤醒" class="headerlink" title="进程唤醒"></a>进程唤醒</h2><p>将进程从阻塞队列移出<br>将进程由阻塞态转为就绪态<br>将进程插入就绪队列</p>
+<h1 id="中断是什么"><a href="#中断是什么" class="headerlink" title="中断是什么"></a>中断是什么</h1><p>中断是处理器停止按照已有顺序执行的事件</p>
+<h1 id="为什么要有中断"><a href="#为什么要有中断" class="headerlink" title="为什么要有中断"></a>为什么要有中断</h1><p>中断的存在使得处理器能够与其他设备并行运行，解决了处理器等待设备的时间浪费问题，提高了处理器利用率，改善了性能</p>
+<h1 id="中断类型"><a href="#中断类型" class="headerlink" title="中断类型"></a>中断类型</h1><h2 id="内部中断"><a href="#内部中断" class="headerlink" title="内部中断"></a>内部中断</h2><p>指的是程序运行时出现错误：如除数为0</p>
+<h2 id="外部中断"><a href="#外部中断" class="headerlink" title="外部中断"></a>外部中断</h2><p>外部可屏蔽中断：如打印机<br>外部不可屏蔽中断：如硬件故障或断电</p>
+<h1 id="什么时候响应中断（外部中断）"><a href="#什么时候响应中断（外部中断）" class="headerlink" title="什么时候响应中断（外部中断）"></a>什么时候响应中断（外部中断）</h1><p>程序处于开中断状态<br>且在每条指令执行结束之后进行检测</p>
+<h1 id="中断处理过程！"><a href="#中断处理过程！" class="headerlink" title="中断处理过程！"></a>中断处理过程！</h1><p>中断检测：开中断状态下，每条指令执行结束后进行中断检测<br>中断响应和中断处理：若检测到中断信号，关中断，保存断点和现场，程序计数器PC换为中断服务程序的入口地址（由中断向量表保存，不同中断源对应不同中断向量，根据中断向量查找中断向量表），开中断，执行中断服务程序，关中断，恢复现场和断点，开中断，返回断点</p>
+<h1 id="操作系统做了什么"><a href="#操作系统做了什么" class="headerlink" title="操作系统做了什么"></a>操作系统做了什么</h1><p>初始化中断描述符表<br>初始化中断描述符表寄存器<br>执行中断处理程序</p>
+<h1 id="时钟的重要性"><a href="#时钟的重要性" class="headerlink" title="时钟的重要性"></a>时钟的重要性</h1><p>定时测量<br>防止进程垄断资源<br>与时钟有关的程序需要时钟支持</p>
+<h1 id="操作系统内核完成的时钟功能"><a href="#操作系统内核完成的时钟功能" class="headerlink" title="操作系统内核完成的时钟功能"></a>操作系统内核完成的时钟功能</h1><p>保存当前的日期和时间<br>维持定时器</p>
+]]></content>
+  </entry>
+</search>
