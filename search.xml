@@ -15,6 +15,14 @@
 <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> java.awt.*;</span><br><span class="line"><span class="keyword">import</span> javax.swing.*;</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">E</span></span>&#123;</span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String args[])</span></span>&#123;</span><br><span class="line">WindowButton win =<span class="keyword">new</span> WindowButton(<span class="string">&quot;猜数字&quot;</span>);</span><br><span class="line">&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>下面是程序运行时图<br><img src="https://img-blog.csdnimg.cn/20210402185830664.png" alt="在这里插入图片描述"></p>
 ]]></content>
+      <categories>
+        <category>Java</category>
+      </categories>
+      <tags>
+        <tag>Java</tag>
+        <tag>swing</tag>
+        <tag>可执行程序</tag>
+      </tags>
   </entry>
   <entry>
     <title>Hello World</title>
@@ -49,6 +57,9 @@
 <figure class="highlight java"><table><tr><td class="code"><pre><span class="line">...</span><br><span class="line"><span class="keyword">private</span> <span class="keyword">volatile</span>  <span class="keyword">static</span> Singleton instance=<span class="keyword">null</span>;</span><br><span class="line">...</span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> Singleton <span class="title">getInstance</span><span class="params">()</span></span>&#123;</span><br><span class="line"><span class="keyword">if</span>(instance==<span class="keyword">null</span>)</span><br><span class="line">	<span class="keyword">synchronized</span>(Singleton.class)</span><br><span class="line">	<span class="keyword">if</span>(instance==<span class="keyword">null</span>)instance=<span class="keyword">new</span> Singleton();</span><br><span class="line"><span class="keyword">return</span> instance;	</span><br><span class="line">	&#125;</span><br><span class="line">...</span><br></pre></td></tr></table></figure>
 <p>这样保证了线程的安全，而且只有第一次实现实例的时候会同步，减小了性能开销</p>
 ]]></content>
+      <categories>
+        <category>设计模式</category>
+      </categories>
   </entry>
   <entry>
     <title>操作系统进程</title>
@@ -70,6 +81,9 @@
 <h1 id="时钟的重要性"><a href="#时钟的重要性" class="headerlink" title="时钟的重要性"></a>时钟的重要性</h1><p>定时测量<br>防止进程垄断资源<br>与时钟有关的程序需要时钟支持</p>
 <h1 id="操作系统内核完成的时钟功能"><a href="#操作系统内核完成的时钟功能" class="headerlink" title="操作系统内核完成的时钟功能"></a>操作系统内核完成的时钟功能</h1><p>保存当前的日期和时间<br>维持定时器</p>
 ]]></content>
+      <categories>
+        <category>操作系统</category>
+      </categories>
   </entry>
   <entry>
     <title>数据结构与算法：Java单链表</title>
@@ -80,5 +94,9 @@
 <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">LinkList</span></span>&#123;</span><br><span class="line">    Node head=<span class="keyword">null</span>;<span class="comment">//每个链表都有头结点</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">addNode</span><span class="params">(<span class="keyword">int</span> e)</span></span>&#123;</span><br><span class="line"><span class="comment">//给链表增加结点的方法，这里只示例尾部结点添加，其他插入也大同小异</span></span><br><span class="line">        Node n=<span class="keyword">new</span> Node(e);</span><br><span class="line">        Node tmp=head;<span class="comment">//head引用不能动，因为head标识链表的起始位置，申请一个tmp引用来进行操作</span></span><br><span class="line">        <span class="keyword">if</span>(head==<span class="keyword">null</span>)&#123;head=n;<span class="keyword">return</span>;&#125;<span class="comment">//若链表为空，则直接添加在第一个结点</span></span><br><span class="line">        <span class="keyword">while</span>(tmp.next!=<span class="keyword">null</span>)&#123;</span><br><span class="line">            tmp=tmp.next;<span class="comment">//将tmp引用向后移,一直移到最后一个结点</span></span><br><span class="line">        &#125;</span><br><span class="line">        tmp.next=n;<span class="comment">//在最后一个结点后添加新结点</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">delNode</span><span class="params">(<span class="keyword">int</span> n)</span></span>&#123;</span><br><span class="line">        <span class="comment">//删除指定位置的结点，第一个结点是head指向的结点</span></span><br><span class="line">        Node pre=head;</span><br><span class="line">        <span class="keyword">if</span>(n==<span class="number">1</span>)&#123;head=head.next;<span class="keyword">return</span>;&#125;<span class="comment">//</span></span><br><span class="line">        <span class="keyword">int</span> num=<span class="number">2</span>;</span><br><span class="line">        <span class="keyword">while</span>(num&lt;n)&#123;</span><br><span class="line">            pre=pre.next;<span class="comment">//pre指向被删除的前一个结点</span></span><br><span class="line">            num++;</span><br><span class="line">        &#125;</span><br><span class="line">        pre.next=pre.next.next;<span class="comment">//删除结点</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">print</span><span class="params">()</span></span>&#123;<span class="comment">//输出链表</span></span><br><span class="line">        Node tmp=head;</span><br><span class="line">        <span class="keyword">if</span>(tmp==<span class="keyword">null</span>)&#123;System.out.print(<span class="string">&quot;null&quot;</span>);<span class="keyword">return</span>;&#125;</span><br><span class="line">        <span class="keyword">do</span>&#123;</span><br><span class="line">        System.out.print(tmp.data+<span class="string">&quot; &quot;</span>);</span><br><span class="line">        tmp=tmp.next;&#125;<span class="keyword">while</span>(tmp.next!=<span class="keyword">null</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>链表操作关键在于两处<br>1：head始终代表链表的起始位置<br>2：如果当前引用的结点为空，则空结点不能有下一个结点，否则会报错</p>
 ]]></content>
+      <categories>
+        <category>数据结构与算法</category>
+        <category>Java</category>
+      </categories>
   </entry>
 </search>
