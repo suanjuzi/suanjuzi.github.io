@@ -1,0 +1,468 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/cornucopia_32.625814863103px_1220531_easyicon.net">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/cornucopia_16.312907431551px_1220531_easyicon.net">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+  <link rel="stylesheet" href="/lib/pace/pace-theme-minimal.min.css">
+  <script src="/lib/pace/pace.min.js"></script>
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="猜数字小程序既然是Java程序就要用到swing组件 12import java.awt.*;import javax.swing.*; 然后创建小程序类，继承swing中的Jframe类以便实现窗口功能，同时继承ActionListener接口来监听用户行为，以便实时交互 1class WindowButton extends JFrame implements ActionListener 利">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Java学习：微型可运行程序：猜数字小程序">
+<meta property="og:url" content="http://example.com/2021/04/02/Java%E5%AD%A6%E4%B9%A0%EF%BC%9A%E5%BE%AE%E5%9E%8B%E5%8F%AF%E8%BF%90%E8%A1%8C%E7%A8%8B%E5%BA%8F%EF%BC%9A%E7%8C%9C%E6%95%B0%E5%AD%97%E5%B0%8F%E7%A8%8B%E5%BA%8F/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="猜数字小程序既然是Java程序就要用到swing组件 12import java.awt.*;import javax.swing.*; 然后创建小程序类，继承swing中的Jframe类以便实现窗口功能，同时继承ActionListener接口来监听用户行为，以便实时交互 1class WindowButton extends JFrame implements ActionListener 利">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20210402185830664.png">
+<meta property="article:published_time" content="2021-04-02T10:59:36.044Z">
+<meta property="article:modified_time" content="2021-04-02T11:00:09.378Z">
+<meta property="article:author" content="jjdlx">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://img-blog.csdnimg.cn/20210402185830664.png">
+
+<link rel="canonical" href="http://example.com/2021/04/02/Java%E5%AD%A6%E4%B9%A0%EF%BC%9A%E5%BE%AE%E5%9E%8B%E5%8F%AF%E8%BF%90%E8%A1%8C%E7%A8%8B%E5%BA%8F%EF%BC%9A%E7%8C%9C%E6%95%B0%E5%AD%97%E5%B0%8F%E7%A8%8B%E5%BA%8F/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>Java学习：微型可运行程序：猜数字小程序 | Hexo</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Hexo</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/04/02/Java%E5%AD%A6%E4%B9%A0%EF%BC%9A%E5%BE%AE%E5%9E%8B%E5%8F%AF%E8%BF%90%E8%A1%8C%E7%A8%8B%E5%BA%8F%EF%BC%9A%E7%8C%9C%E6%95%B0%E5%AD%97%E5%B0%8F%E7%A8%8B%E5%BA%8F/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="jjdlx">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Java学习：微型可运行程序：猜数字小程序
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2021-04-02 18:59:36 / 修改时间：19:00:09" itemprop="dateCreated datePublished" datetime="2021-04-02T18:59:36+08:00">2021-04-02</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="猜数字小程序"><a href="#猜数字小程序" class="headerlink" title="猜数字小程序"></a>猜数字小程序</h1><p>既然是Java程序就要用到swing组件</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> java.awt.*;</span><br><span class="line"><span class="keyword">import</span> javax.swing.*;</span><br></pre></td></tr></table></figure>
+<p>然后创建小程序类，继承swing中的Jframe类以便实现窗口功能，同时继承ActionListener接口来监听用户行为，以便实时交互</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">WindowButton</span> <span class="keyword">extends</span> <span class="title">JFrame</span> <span class="keyword">implements</span> <span class="title">ActionListener</span></span></span><br></pre></td></tr></table></figure>
+<p>利用继承的组件构造几个按钮，标签和可输入文本框</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">JTextField txt;</span><br><span class="line">JButton buttonNumber,buttonEnter,buttonD1,buttonD2,buttonD3,buttonD4,buttonD5;</span><br><span class="line">JLabel label;</span><br></pre></td></tr></table></figure>
+<p>下面是程序类`</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> java.awt.*;</span><br><span class="line"><span class="keyword">import</span> javax.swing.*;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">WindowButton</span> <span class="keyword">extends</span> <span class="title">JFrame</span> <span class="keyword">implements</span> <span class="title">ActionListener</span></span>&#123;</span><br><span class="line"><span class="keyword">int</span> number;</span><br><span class="line"><span class="keyword">int</span> num=<span class="number">10</span>;</span><br><span class="line"><span class="keyword">int</span> c=<span class="number">5</span>;</span><br><span class="line">JTextField txt;</span><br><span class="line">JButton buttonNumber,buttonEnter,buttonD1,buttonD2,buttonD3,buttonD4,buttonD5;</span><br><span class="line">JLabel label;</span><br><span class="line">JPasswordField password;</span><br><span class="line">WindowButton (String s)&#123;</span><br><span class="line"><span class="keyword">super</span>(s);</span><br><span class="line">addWindowListener(<span class="keyword">new</span> WindowAdapter()</span><br><span class="line">&#123;</span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">windowClosing</span><span class="params">(WindowEvent e)</span></span>&#123;dispose();&#125;</span><br><span class="line">&#125;);</span><br><span class="line">setLayout(<span class="keyword">new</span> FlowLayout());</span><br><span class="line">buttonNumber=<span class="keyword">new</span> JButton(<span class="string">&quot;点我，我就想出一个数&quot;</span>);</span><br><span class="line">add(buttonNumber);</span><br><span class="line">label=<span class="keyword">new</span> JLabel(<span class="string">&quot;输入你的猜测&quot;</span>,JLabel.CENTER);</span><br><span class="line">label.setBackground(Color.cyan);</span><br><span class="line">txt=<span class="keyword">new</span> JTextField(<span class="string">&quot;0&quot;</span>,<span class="number">10</span>);</span><br><span class="line">add(label);</span><br><span class="line">add(txt);</span><br><span class="line">buttonEnter=<span class="keyword">new</span> JButton(<span class="string">&quot;确定&quot;</span>);</span><br><span class="line">add(buttonEnter);</span><br><span class="line">buttonD1=<span class="keyword">new</span> JButton(<span class="string">&quot;点我进入简单难度&quot;</span>);</span><br><span class="line">add(buttonD1);</span><br><span class="line">buttonD2=<span class="keyword">new</span> JButton(<span class="string">&quot;点我进入普通难度&quot;</span>);</span><br><span class="line">add(buttonD2);</span><br><span class="line">buttonD3=<span class="keyword">new</span> JButton(<span class="string">&quot;点我进入困难难度&quot;</span>);</span><br><span class="line">add(buttonD3);</span><br><span class="line">buttonD4=<span class="keyword">new</span> JButton(<span class="string">&quot;点我进入噩梦难度&quot;</span>);</span><br><span class="line">add(buttonD4);</span><br><span class="line">buttonD5=<span class="keyword">new</span> JButton(<span class="string">&quot;点我进入地狱难度&quot;</span>);</span><br><span class="line">add(buttonD5);</span><br><span class="line">buttonEnter.addActionListener(<span class="keyword">this</span>);</span><br><span class="line">buttonNumber.addActionListener(<span class="keyword">this</span>);</span><br><span class="line">buttonD1.addActionListener(<span class="keyword">this</span>);</span><br><span class="line">buttonD2.addActionListener(<span class="keyword">this</span>);</span><br><span class="line">buttonD3.addActionListener(<span class="keyword">this</span>);</span><br><span class="line">buttonD4.addActionListener(<span class="keyword">this</span>);</span><br><span class="line">buttonD5.addActionListener(<span class="keyword">this</span>);</span><br><span class="line">setBounds(<span class="number">100</span>,<span class="number">400</span>,<span class="number">1300</span>,<span class="number">100</span>);</span><br><span class="line">setVisible(<span class="keyword">true</span>);</span><br><span class="line">validate();</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">actionPerformed</span><span class="params">(ActionEvent e)</span></span>&#123;</span><br><span class="line"><span class="keyword">if</span>(e.getSource()==buttonD1)&#123;num=<span class="number">10</span>;c=<span class="number">5</span>;label.setText(<span class="string">&quot;现在是简单难度，请点前面的按钮&quot;</span>);&#125;</span><br><span class="line"><span class="keyword">else</span> <span class="keyword">if</span>(e.getSource()==buttonD2)&#123;num=<span class="number">100</span>;c=<span class="number">8</span>;label.setText(<span class="string">&quot;现在是普通难度，请点前面的按钮&quot;</span>);&#125;</span><br><span class="line"><span class="keyword">else</span> <span class="keyword">if</span>(e.getSource()==buttonD3)&#123;num=<span class="number">1000</span>;c=<span class="number">10</span>;label.setText(<span class="string">&quot;现在是困难难度，请点前面的按钮&quot;</span>);&#125;</span><br><span class="line"><span class="keyword">else</span> <span class="keyword">if</span>(e.getSource()==buttonD4)&#123;num=<span class="number">10000000</span>;c=<span class="number">20</span>;label.setText(<span class="string">&quot;现在是噩梦难度，请点前面的按钮&quot;</span>);&#125;</span><br><span class="line"><span class="keyword">else</span> <span class="keyword">if</span>(e.getSource()==buttonD5)&#123;num=<span class="number">1000000000</span>;c=<span class="number">30</span>;label.setText(<span class="string">&quot;现在是地狱难度，你不可能成功的，呼哈哈！别忘了前面的按钮，不过算了，反正你也过不了&quot;</span>);&#125;</span><br><span class="line"><span class="keyword">else</span> <span class="keyword">if</span>(e.getSource()==buttonNumber)&#123;</span><br><span class="line"> number=(<span class="keyword">int</span>)(Math.random()*num)+<span class="number">1</span>;</span><br><span class="line"><span class="keyword">if</span>(num==<span class="number">10</span>)</span><br><span class="line">&#123;label.setText(<span class="string">&quot;现在是简单难度，输入你的猜测：&quot;</span>);&#125;</span><br><span class="line"><span class="keyword">else</span> <span class="keyword">if</span>(num==<span class="number">100</span>)</span><br><span class="line">&#123;label.setText(<span class="string">&quot;现在是普通难度，输入你的猜测：&quot;</span>);&#125;</span><br><span class="line"><span class="keyword">else</span> <span class="keyword">if</span>(num==<span class="number">1000</span>)</span><br><span class="line">&#123;label.setText(<span class="string">&quot;现在是困难难度，输入你的猜测：&quot;</span>);&#125;</span><br><span class="line"><span class="keyword">else</span> <span class="keyword">if</span>(num==<span class="number">10000000</span>)</span><br><span class="line">&#123;label.setText(<span class="string">&quot;现在是噩梦难度，猜中了奖励十块钱：&quot;</span>);&#125;</span><br><span class="line"><span class="keyword">else</span> <span class="keyword">if</span>(num==<span class="number">1000000000</span>)</span><br><span class="line">&#123;label.setText(<span class="string">&quot;这一关不可能成功，猜中了奖励一百块钱：&quot;</span>);&#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">else</span> <span class="keyword">if</span>(e.getSource()==buttonEnter)&#123;</span><br><span class="line"><span class="keyword">int</span> guess=<span class="number">0</span>;</span><br><span class="line"><span class="keyword">try</span>&#123;</span><br><span class="line">guess=Integer.parseInt(txt.getText());</span><br><span class="line"><span class="keyword">if</span>(guess==number)&#123;</span><br><span class="line">label.setText(<span class="string">&quot;恭喜你答对啦,超棒！！&quot;</span>);&#125;</span><br><span class="line"><span class="keyword">else</span> <span class="keyword">if</span>(guess&gt;number&amp;&amp;c&gt;=<span class="number">0</span>)&#123;</span><br><span class="line">label.setText(<span class="string">&quot;有点大了，加油吧，你还有&quot;</span>+(c--)+<span class="string">&quot;次机会哦&quot;</span>);txt.setText(<span class="keyword">null</span>);&#125;</span><br><span class="line"><span class="keyword">else</span> <span class="keyword">if</span>(guess&lt;number&amp;&amp;c&gt;<span class="number">0</span>)&#123;</span><br><span class="line">label.setText(<span class="string">&quot;猜小了，继续吧，你还有&quot;</span>+(c--)+<span class="string">&quot;次机会&quot;</span>);txt.setText(<span class="keyword">null</span>);&#125;</span><br><span class="line"><span class="keyword">else</span> <span class="keyword">if</span>(c&lt;=<span class="number">0</span>)&#123;</span><br><span class="line">label.setText(<span class="string">&quot;很遗憾，你输了&quot;</span>);&#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">catch</span>(NumberFormatException event)&#123;label.setText(<span class="string">&quot;请输入数字&quot;</span>);&#125;</span><br><span class="line">&#125;</span><br><span class="line">&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>下面是主类</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> java.awt.*;</span><br><span class="line"><span class="keyword">import</span> javax.swing.*;</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">E</span></span>&#123;</span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String args[])</span></span>&#123;</span><br><span class="line">WindowButton win =<span class="keyword">new</span> WindowButton(<span class="string">&quot;猜数字&quot;</span>);</span><br><span class="line">&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>下面是程序运行时图<br><img src="https://img-blog.csdnimg.cn/20210402185830664.png" alt="在这里插入图片描述"></p>
+
+    </div>
+
+    
+    
+    
+ 
+        
+
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者： </strong>jjdlx
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="http://example.com/2021/04/02/Java%E5%AD%A6%E4%B9%A0%EF%BC%9A%E5%BE%AE%E5%9E%8B%E5%8F%AF%E8%BF%90%E8%A1%8C%E7%A8%8B%E5%BA%8F%EF%BC%9A%E7%8C%9C%E6%95%B0%E5%AD%97%E5%B0%8F%E7%A8%8B%E5%BA%8F/" title="Java学习：微型可运行程序：猜数字小程序">http://example.com/2021/04/02/Java学习：微型可运行程序：猜数字小程序/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+
+      <footer class="post-footer">
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2021/03/31/%E4%BB%80%E4%B9%88%E6%98%AF%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F%EF%BC%8C%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F%E7%9A%84%E4%BC%98%E7%82%B9%EF%BC%8C%E9%A5%BF%E6%B1%89%E5%92%8C%E6%87%92%E6%B1%89%E5%BC%8F%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F%E7%9A%84%E5%8C%BA%E5%88%AB/" rel="prev" title="什么是单例模式，单例模式的优点，饿汉和懒汉式单例模式的区别">
+      <i class="fa fa-chevron-left"></i> 什么是单例模式，单例模式的优点，饿汉和懒汉式单例模式的区别
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2021/04/03/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95%EF%BC%9AJava%E5%8D%95%E9%93%BE%E8%A1%A8/" rel="next" title="数据结构与算法：Java单链表">
+      数据结构与算法：Java单链表 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%8C%9C%E6%95%B0%E5%AD%97%E5%B0%8F%E7%A8%8B%E5%BA%8F"><span class="nav-number">1.</span> <span class="nav-text">猜数字小程序</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="jjdlx"
+      src="/images/avatar.png">
+  <p class="site-author-name" itemprop="name">jjdlx</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">5</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/suanjuzi" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;suanjuzi" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:1987984878@qq.com" title="E-Mail → mailto:1987984878@qq.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+
+
+  <div class="links-of-blogroll motion-element">
+    <div class="links-of-blogroll-title"><i class="link fa-fw"></i>
+      链接网站
+    </div>
+    <ul class="links-of-blogroll-list">
+        <li class="links-of-blogroll-item">
+          <a href="https://baidu.com/" title="https:&#x2F;&#x2F;baidu.com" rel="noopener" target="_blank">百度</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://fishc.com.cn/" title="https:&#x2F;&#x2F;fishc.com.cn" rel="noopener" target="_blank">鱼C论坛</a>
+        </li>
+    </ul>
+  </div>
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">jjdlx</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div>
+<div class="theme-info">
+  <div class="powered-by"></div>
+  <span class="post-count">博客全站共3k字</span>
+</div>
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  
+  <script color='0,0,255' opacity='0.5' zIndex='-1' count='99' src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+  <script defer src="/lib/three/three.min.js"></script>
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>
