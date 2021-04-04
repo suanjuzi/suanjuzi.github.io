@@ -52,6 +52,39 @@
       </categories>
   </entry>
   <entry>
+    <title>Java泛型</title>
+    <url>/2021/04/04/Java%E6%B3%9B%E5%9E%8B/</url>
+    <content><![CDATA[<h1 id="什么是泛型"><a href="#什么是泛型" class="headerlink" title="什么是泛型"></a>什么是泛型</h1><p>类比于方法中的形参，约束了传递进入方法的参数类型，泛型就是一种约束，定义泛型后，约束了进入容器的类的类型：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">List&lt;String&gt; arr=<span class="keyword">new</span> ArrayList&lt;String&gt;();<span class="comment">//“&lt;&gt;”里的就是泛型类型</span></span><br></pre></td></tr></table></figure>
+<p>List容器我们都知道，可以存放任何类型的元素，如下：</p>
+<blockquote>
+<p>关于Java容器详见我的blog：<a href="http://jjdlx.top/2021/04/03/Java%E5%AE%B9%E5%99%A8/">Java容器</a></p>
+</blockquote>
+<p>但是，像上面那样在list后面加上<String>后，能够存入arr的元素就被限制为String类型，如果加上一段代码如下：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">list.add(<span class="number">12</span>);</span><br></pre></td></tr></table></figure>
+<p>在编译的时候就会报错：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">java.lang.ClassCastException: java.lang.Integer cannot be cast to java.lang.String</span><br></pre></td></tr></table></figure>
+<p>这里就要引入泛型的一个特性：<br><strong>只在编译的时候对泛型进行有效判断，判断后就将泛型信息擦除，不会进入运行阶段</strong></p>
+<h1 id="泛型的用法"><a href="#泛型的用法" class="headerlink" title="泛型的用法"></a>泛型的用法</h1><h2 id="泛型类"><a href="#泛型类" class="headerlink" title="泛型类"></a>泛型类</h2><p>在前面我们讨论的List的泛型约束用法，因为List本身就是个泛型类，所以我们可以在实现实例时直接在&lt;&gt;中添加元素类型。<br>如果我们想用自己写的类来使用泛型，必须在类定义时定义为泛型类：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">A</span>&lt;<span class="title">T</span>&gt;</span>&#123;&#125;</span><br><span class="line">A&lt;String&gt; str=<span class="keyword">new</span> A&lt;String&gt;();</span><br></pre></td></tr></table></figure>
+<p>其中，T叫做类型参数变量，String叫做实际类型参数。<br>泛型类也可以被继承，继承的两种方式，可以继续选择不限制类型：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">B</span>&lt;<span class="title">T</span>&gt; <span class="keyword">extends</span> <span class="title">A</span>&lt;<span class="title">T</span>&gt;</span>&#123;</span><br><span class="line"><span class="function"><span class="keyword">public</span>&lt;T&gt; <span class="keyword">void</span> <span class="title">outV</span><span class="params">(T t)</span></span>&#123;&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>也可以选择对传入类型进行限制：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">B</span> <span class="keyword">extends</span> <span class="title">A</span>&lt;<span class="title">String</span>&gt;</span>&#123;</span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">outV</span><span class="params">(String str)</span></span>&#123;&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>注意两者区别</p>
+<h2 id="泛型方法"><a href="#泛型方法" class="headerlink" title="泛型方法"></a>泛型方法</h2><p>如果不想对进入容器的元素类型进行限制，可以不声明类型：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">A</span>&lt;<span class="title">T</span>&gt;</span>&#123;&#125;</span><br><span class="line">A str=<span class="keyword">new</span> A();</span><br></pre></td></tr></table></figure>
+<p>这样，进入str的元素并不受泛型约束，<br>如果A中实现定义了一个泛型方法：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> &lt;T&gt; <span class="function"><span class="keyword">void</span> <span class="title">outV</span><span class="params">(T t)</span></span>&#123;</span><br><span class="line">System.out.println(t);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>那么str可以直接调用outV方法，并且传入的参数类型不受限制，传入什么类型，就输出什么类型</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">str.outV(<span class="number">123</span>);</span><br><span class="line">str.outV(<span class="string">&quot;qwe&quot;</span>);</span><br></pre></td></tr></table></figure>
+<p>以上都是合法的</p>
+]]></content>
+      <categories>
+        <category>Java</category>
+      </categories>
+  </entry>
+  <entry>
     <title>什么是单例模式，单例模式的优点，饿汉和懒汉式单例模式的区别</title>
     <url>/2021/03/31/%E4%BB%80%E4%B9%88%E6%98%AF%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F%EF%BC%8C%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F%E7%9A%84%E4%BC%98%E7%82%B9%EF%BC%8C%E9%A5%BF%E6%B1%89%E5%92%8C%E6%87%92%E6%B1%89%E5%BC%8F%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F%E7%9A%84%E5%8C%BA%E5%88%AB/</url>
     <content><![CDATA[<h1 id="什么是单例模式"><a href="#什么是单例模式" class="headerlink" title="什么是单例模式"></a>什么是单例模式</h1><p>单例模式是一种设计模式，是创建式模式的一种。它确保了一个类有且只有一个对象存在。<br>单例模式的定义：<br>1：定义私有的静态成员变量private static<br>2：私有化构造函数private<br>3：提供一个公有的的静态方法以便构造实例public static</p>
@@ -68,20 +101,6 @@
 ]]></content>
       <categories>
         <category>设计模式</category>
-      </categories>
-  </entry>
-  <entry>
-    <title>数据结构与算法：Java单链表</title>
-    <url>/2021/04/03/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95%EF%BC%9AJava%E5%8D%95%E9%93%BE%E8%A1%A8/</url>
-    <content><![CDATA[<p> 首先我们要知道，在Java中是没有指针的概念的<br> 而Java虽然没有指针，但有着引用<br> 利用引用一样可以制造链表</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Node</span></span>&#123;</span><br><span class="line">Node next=<span class="keyword">null</span>;<span class="comment">//节点被创建的同时创建对象引用，但没申请对象空间</span></span><br><span class="line"><span class="keyword">int</span> data;</span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="title">Node</span><span class="params">(<span class="keyword">int</span> n)</span>data</span>=n;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>每一个结点都有一个对象引用，这使得链表在逻辑上是连续的，不用考虑物理顺序<br>通常情况下，链表有一个head，用来标识链表的起始位置，head并不作为链表的结点，head只是一个引用，head的引用对象是链表的第一个结点。<br>如：head.data==第一个结点.data;<br>我们接下来创建链表类，链表由结点构成</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">LinkList</span></span>&#123;</span><br><span class="line">    Node head=<span class="keyword">null</span>;<span class="comment">//每个链表都有头结点</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">addNode</span><span class="params">(<span class="keyword">int</span> e)</span></span>&#123;</span><br><span class="line"><span class="comment">//给链表增加结点的方法，这里只示例尾部结点添加，其他插入也大同小异</span></span><br><span class="line">        Node n=<span class="keyword">new</span> Node(e);</span><br><span class="line">        Node tmp=head;<span class="comment">//head引用不能动，因为head标识链表的起始位置，申请一个tmp引用来进行操作</span></span><br><span class="line">        <span class="keyword">if</span>(head==<span class="keyword">null</span>)&#123;head=n;<span class="keyword">return</span>;&#125;<span class="comment">//若链表为空，则直接添加在第一个结点</span></span><br><span class="line">        <span class="keyword">while</span>(tmp.next!=<span class="keyword">null</span>)&#123;</span><br><span class="line">            tmp=tmp.next;<span class="comment">//将tmp引用向后移,一直移到最后一个结点</span></span><br><span class="line">        &#125;</span><br><span class="line">        tmp.next=n;<span class="comment">//在最后一个结点后添加新结点</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">delNode</span><span class="params">(<span class="keyword">int</span> n)</span></span>&#123;</span><br><span class="line">        <span class="comment">//删除指定位置的结点，第一个结点是head指向的结点</span></span><br><span class="line">        Node pre=head;</span><br><span class="line">        <span class="keyword">if</span>(n==<span class="number">1</span>)&#123;head=head.next;<span class="keyword">return</span>;&#125;<span class="comment">//</span></span><br><span class="line">        <span class="keyword">int</span> num=<span class="number">2</span>;</span><br><span class="line">        <span class="keyword">while</span>(num&lt;n)&#123;</span><br><span class="line">            pre=pre.next;<span class="comment">//pre指向被删除的前一个结点</span></span><br><span class="line">            num++;</span><br><span class="line">        &#125;</span><br><span class="line">        pre.next=pre.next.next;<span class="comment">//删除结点</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">print</span><span class="params">()</span></span>&#123;<span class="comment">//输出链表</span></span><br><span class="line">        Node tmp=head;</span><br><span class="line">        <span class="keyword">if</span>(tmp==<span class="keyword">null</span>)&#123;System.out.print(<span class="string">&quot;null&quot;</span>);<span class="keyword">return</span>;&#125;</span><br><span class="line">        <span class="keyword">do</span>&#123;</span><br><span class="line">        System.out.print(tmp.data+<span class="string">&quot; &quot;</span>);</span><br><span class="line">        tmp=tmp.next;&#125;<span class="keyword">while</span>(tmp.next!=<span class="keyword">null</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>链表操作关键在于两处<br>1：head始终代表链表的起始位置<br>2：如果当前引用的结点为空，则空结点不能有下一个结点，否则会报错</p>
-]]></content>
-      <categories>
-        <category>数据结构与算法</category>
-        <category>Java</category>
       </categories>
   </entry>
   <entry>
@@ -106,6 +125,20 @@
 ]]></content>
       <categories>
         <category>操作系统</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>数据结构与算法：Java单链表</title>
+    <url>/2021/04/03/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95%EF%BC%9AJava%E5%8D%95%E9%93%BE%E8%A1%A8/</url>
+    <content><![CDATA[<p> 首先我们要知道，在Java中是没有指针的概念的<br> 而Java虽然没有指针，但有着引用<br> 利用引用一样可以制造链表</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Node</span></span>&#123;</span><br><span class="line">Node next=<span class="keyword">null</span>;<span class="comment">//节点被创建的同时创建对象引用，但没申请对象空间</span></span><br><span class="line"><span class="keyword">int</span> data;</span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="title">Node</span><span class="params">(<span class="keyword">int</span> n)</span>data</span>=n;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>每一个结点都有一个对象引用，这使得链表在逻辑上是连续的，不用考虑物理顺序<br>通常情况下，链表有一个head，用来标识链表的起始位置，head并不作为链表的结点，head只是一个引用，head的引用对象是链表的第一个结点。<br>如：head.data==第一个结点.data;<br>我们接下来创建链表类，链表由结点构成</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">LinkList</span></span>&#123;</span><br><span class="line">    Node head=<span class="keyword">null</span>;<span class="comment">//每个链表都有头结点</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">addNode</span><span class="params">(<span class="keyword">int</span> e)</span></span>&#123;</span><br><span class="line"><span class="comment">//给链表增加结点的方法，这里只示例尾部结点添加，其他插入也大同小异</span></span><br><span class="line">        Node n=<span class="keyword">new</span> Node(e);</span><br><span class="line">        Node tmp=head;<span class="comment">//head引用不能动，因为head标识链表的起始位置，申请一个tmp引用来进行操作</span></span><br><span class="line">        <span class="keyword">if</span>(head==<span class="keyword">null</span>)&#123;head=n;<span class="keyword">return</span>;&#125;<span class="comment">//若链表为空，则直接添加在第一个结点</span></span><br><span class="line">        <span class="keyword">while</span>(tmp.next!=<span class="keyword">null</span>)&#123;</span><br><span class="line">            tmp=tmp.next;<span class="comment">//将tmp引用向后移,一直移到最后一个结点</span></span><br><span class="line">        &#125;</span><br><span class="line">        tmp.next=n;<span class="comment">//在最后一个结点后添加新结点</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">delNode</span><span class="params">(<span class="keyword">int</span> n)</span></span>&#123;</span><br><span class="line">        <span class="comment">//删除指定位置的结点，第一个结点是head指向的结点</span></span><br><span class="line">        Node pre=head;</span><br><span class="line">        <span class="keyword">if</span>(n==<span class="number">1</span>)&#123;head=head.next;<span class="keyword">return</span>;&#125;<span class="comment">//</span></span><br><span class="line">        <span class="keyword">int</span> num=<span class="number">2</span>;</span><br><span class="line">        <span class="keyword">while</span>(num&lt;n)&#123;</span><br><span class="line">            pre=pre.next;<span class="comment">//pre指向被删除的前一个结点</span></span><br><span class="line">            num++;</span><br><span class="line">        &#125;</span><br><span class="line">        pre.next=pre.next.next;<span class="comment">//删除结点</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">print</span><span class="params">()</span></span>&#123;<span class="comment">//输出链表</span></span><br><span class="line">        Node tmp=head;</span><br><span class="line">        <span class="keyword">if</span>(tmp==<span class="keyword">null</span>)&#123;System.out.print(<span class="string">&quot;null&quot;</span>);<span class="keyword">return</span>;&#125;</span><br><span class="line">        <span class="keyword">do</span>&#123;</span><br><span class="line">        System.out.print(tmp.data+<span class="string">&quot; &quot;</span>);</span><br><span class="line">        tmp=tmp.next;&#125;<span class="keyword">while</span>(tmp.next!=<span class="keyword">null</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>链表操作关键在于两处<br>1：head始终代表链表的起始位置<br>2：如果当前引用的结点为空，则空结点不能有下一个结点，否则会报错</p>
+]]></content>
+      <categories>
+        <category>数据结构与算法</category>
+        <category>Java</category>
       </categories>
   </entry>
 </search>
