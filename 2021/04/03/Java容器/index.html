@@ -22,19 +22,19 @@
     var CONFIG = {"hostname":"example.com","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
-  <meta name="description" content="什么是单例模式单例模式是一种设计模式，是创建式模式的一种。它确保了一个类有且只有一个对象存在。单例模式的定义：1：定义私有的静态成员变量private static2：私有化构造函数private3：提供一个公有的的静态方法以便构造实例public static 单例模式的优点和适用场景优点：1：避免了频繁的创建和销毁对象，减少了系统开销2：节省了内存空间，且内存中只有一个对象3：提供了一个全局访">
+  <meta name="description" content="在Java中有着一种专门存放对象或对象引用的类，叫做容器类，或者叫集合类容器类并不是特指某个类。按照一定的存储方式对对象进行存储的类都叫容器类。而按照存储方式的不同可将容器类分为两种1：实现collection接口的类：定义独立元素的序列2：实现Map接口的类：定义成对的键值（key-value），并且map不能有重复的key collection容器collection可以继续细分为三种子接口1">
 <meta property="og:type" content="article">
-<meta property="og:title" content="什么是单例模式，单例模式的优点，饿汉和懒汉式单例模式的区别">
-<meta property="og:url" content="http://example.com/2021/03/31/%E4%BB%80%E4%B9%88%E6%98%AF%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F%EF%BC%8C%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F%E7%9A%84%E4%BC%98%E7%82%B9%EF%BC%8C%E9%A5%BF%E6%B1%89%E5%92%8C%E6%87%92%E6%B1%89%E5%BC%8F%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F%E7%9A%84%E5%8C%BA%E5%88%AB/index.html">
+<meta property="og:title" content="Java容器类">
+<meta property="og:url" content="http://example.com/2021/04/03/Java%E5%AE%B9%E5%99%A8/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="什么是单例模式单例模式是一种设计模式，是创建式模式的一种。它确保了一个类有且只有一个对象存在。单例模式的定义：1：定义私有的静态成员变量private static2：私有化构造函数private3：提供一个公有的的静态方法以便构造实例public static 单例模式的优点和适用场景优点：1：避免了频繁的创建和销毁对象，减少了系统开销2：节省了内存空间，且内存中只有一个对象3：提供了一个全局访">
+<meta property="og:description" content="在Java中有着一种专门存放对象或对象引用的类，叫做容器类，或者叫集合类容器类并不是特指某个类。按照一定的存储方式对对象进行存储的类都叫容器类。而按照存储方式的不同可将容器类分为两种1：实现collection接口的类：定义独立元素的序列2：实现Map接口的类：定义成对的键值（key-value），并且map不能有重复的key collection容器collection可以继续细分为三种子接口1">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2021-03-31T12:26:44.149Z">
-<meta property="article:modified_time" content="2021-04-03T02:50:27.535Z">
+<meta property="article:published_time" content="2021-04-03T10:20:38.745Z">
+<meta property="article:modified_time" content="2021-04-04T01:53:32.632Z">
 <meta property="article:author" content="jjdlx">
 <meta name="twitter:card" content="summary">
 
-<link rel="canonical" href="http://example.com/2021/03/31/%E4%BB%80%E4%B9%88%E6%98%AF%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F%EF%BC%8C%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F%E7%9A%84%E4%BC%98%E7%82%B9%EF%BC%8C%E9%A5%BF%E6%B1%89%E5%92%8C%E6%87%92%E6%B1%89%E5%BC%8F%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F%E7%9A%84%E5%8C%BA%E5%88%AB/">
+<link rel="canonical" href="http://example.com/2021/04/03/Java%E5%AE%B9%E5%99%A8/">
 
 
 <script id="page-configurations">
@@ -47,7 +47,7 @@
   };
 </script>
 
-  <title>什么是单例模式，单例模式的优点，饿汉和懒汉式单例模式的区别 | Hexo</title>
+  <title>Java容器类 | Hexo</title>
   
 
 
@@ -195,7 +195,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2021/03/31/%E4%BB%80%E4%B9%88%E6%98%AF%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F%EF%BC%8C%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F%E7%9A%84%E4%BC%98%E7%82%B9%EF%BC%8C%E9%A5%BF%E6%B1%89%E5%92%8C%E6%87%92%E6%B1%89%E5%BC%8F%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F%E7%9A%84%E5%8C%BA%E5%88%AB/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/04/03/Java%E5%AE%B9%E5%99%A8/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.png">
@@ -208,7 +208,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          什么是单例模式，单例模式的优点，饿汉和懒汉式单例模式的区别
+          Java容器类
         </h1>
 
         <div class="post-meta">
@@ -218,14 +218,14 @@
               </span>
               <span class="post-meta-item-text">发表于</span>
 
-              <time title="创建时间：2021-03-31 20:26:44" itemprop="dateCreated datePublished" datetime="2021-03-31T20:26:44+08:00">2021-03-31</time>
+              <time title="创建时间：2021-04-03 18:20:38" itemprop="dateCreated datePublished" datetime="2021-04-03T18:20:38+08:00">2021-04-03</time>
             </span>
               <span class="post-meta-item">
                 <span class="post-meta-item-icon">
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-04-03 10:50:27" itemprop="dateModified" datetime="2021-04-03T10:50:27+08:00">2021-04-03</time>
+                <time title="修改时间：2021-04-04 09:53:32" itemprop="dateModified" datetime="2021-04-04T09:53:32+08:00">2021-04-04</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -233,7 +233,11 @@
               </span>
               <span class="post-meta-item-text">分类于</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" itemprop="url" rel="index"><span itemprop="name">设计模式</span></a>
+                  <a href="/categories/Java/" itemprop="url" rel="index"><span itemprop="name">Java</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Java/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/" itemprop="url" rel="index"><span itemprop="name">数据结构与算法</span></a>
                 </span>
             </span>
 
@@ -248,17 +252,24 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <h1 id="什么是单例模式"><a href="#什么是单例模式" class="headerlink" title="什么是单例模式"></a>什么是单例模式</h1><p>单例模式是一种设计模式，是创建式模式的一种。它确保了一个类有且只有一个对象存在。<br>单例模式的定义：<br>1：定义私有的静态成员变量private static<br>2：私有化构造函数private<br>3：提供一个公有的的静态方法以便构造实例public static</p>
-<h1 id="单例模式的优点和适用场景"><a href="#单例模式的优点和适用场景" class="headerlink" title="单例模式的优点和适用场景"></a>单例模式的优点和适用场景</h1><p>优点：<br>1：避免了频繁的创建和销毁对象，减少了系统开销<br>2：节省了内存空间，且内存中只有一个对象<br>3：提供了一个全局访问点<br>适用场景：<br>1：针对某些需要频繁创建和删除对象的情景<br>2：需要频繁的创建对象，但对象创建需要大量的开销<br>3：某些确实只能有一个对象的情景，如某些核心交易类，就只许有一个对象</p>
-<h1 id="饿汉式和懒汉式单例模式区别"><a href="#饿汉式和懒汉式单例模式区别" class="headerlink" title="饿汉式和懒汉式单例模式区别"></a>饿汉式和懒汉式单例模式区别</h1><p>饿汉式：在单例类被加载时，就直接实例化一个对象<br>不关用不用的上，加载时就创建实例，浪费了空间，但是用的时候不需要判断是否需要创建实例，节约了判断的时间<br>属于空间换时间</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">...</span><br><span class="line"><span class="keyword">private</span> <span class="keyword">static</span> Singleton instance=<span class="keyword">new</span> Singleton();</span><br><span class="line">...</span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> Singleton <span class="title">getInstance</span><span class="params">()</span></span>&#123;</span><br><span class="line"><span class="keyword">return</span> instance;</span><br><span class="line">&#125;</span><br><span class="line">...</span><br></pre></td></tr></table></figure>
-
-<p>懒汉式：单例类被加载时，先不实例化一个对象，在公有的静态方法被调用时，才会实例化一个对象<br>JVM加载完之后并不会创建实例，节省了空间，但是在每次获取实例的时候都要进行一次判断，看是否需要创建实例，浪费了时间<br>属于时间换空间</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">...</span><br><span class="line"><span class="keyword">private</span> <span class="keyword">static</span> Singleton;</span><br><span class="line">...</span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">synchronized</span> Singleton <span class="title">getInstance</span><span class="params">()</span></span>&#123;</span><br><span class="line"><span class="keyword">if</span>(instance==<span class="keyword">null</span>)instance=<span class="keyword">new</span> SIngleton();</span><br><span class="line">&#125;</span><br><span class="line">...</span><br></pre></td></tr></table></figure>
-<p>而且由于懒汉式在加载类的时候并不创建实例，因此在真正创建实例时，有可能引发多线程并发问题，本来单例模式保证只有一个实例，由于多线程调用的问题，创建出多个实例来，导致单例模式失效。<br>因此，在公有静态方法上加了个synchronized(同步)关键字来保证线程安全，同一时间只有一个线程能访问该方法。<br>但紧接着问题又出现了，直接在方法上加锁确实简单，但也进一步加大了开销，拉低了整个实例的访问速度。</p>
-<h1 id="改进"><a href="#改进" class="headerlink" title="改进"></a>改进</h1><p>方法：双重检查加锁<br>1：加volatile关键字，保证本地线程不会缓存该变量，变量的读写直接在共享内存中，这样使多线程读到的变量都是正确的<br>2：将synchronized(同步)关键字移入方法内部使用，当方法调用时，先检查是否需要创建实例，如果实例已经存在，直接返回实例，不需要使用同步关键字，如果实例不存在，则进入同步关键字判断，将判断实例是否存在的步骤再进行一遍。<br>在此过程中，检查了两次实例是否存在，还使用了同步关键字加锁，因此被叫做双重检查加锁</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">...</span><br><span class="line"><span class="keyword">private</span> <span class="keyword">volatile</span>  <span class="keyword">static</span> Singleton instance=<span class="keyword">null</span>;</span><br><span class="line">...</span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> Singleton <span class="title">getInstance</span><span class="params">()</span></span>&#123;</span><br><span class="line"><span class="keyword">if</span>(instance==<span class="keyword">null</span>)</span><br><span class="line">	<span class="keyword">synchronized</span>(Singleton.class)</span><br><span class="line">	<span class="keyword">if</span>(instance==<span class="keyword">null</span>)instance=<span class="keyword">new</span> Singleton();</span><br><span class="line"><span class="keyword">return</span> instance;	</span><br><span class="line">	&#125;</span><br><span class="line">...</span><br></pre></td></tr></table></figure>
-<p>这样保证了线程的安全，而且只有第一次实现实例的时候会同步，减小了性能开销</p>
+        <p>在Java中有着一种专门存放对象或对象引用的类，叫做容器类，或者叫集合类<br>容器类并不是特指某个类。按照一定的存储方式对对象进行存储的类都叫容器类。<br>而按照存储方式的不同可将容器类分为两种<br>1：实现collection接口的类：定义独立元素的序列<br>2：实现Map接口的类：定义成对的键值（key-value），并且map不能有重复的key</p>
+<h1 id="collection容器"><a href="#collection容器" class="headerlink" title="collection容器"></a>collection容器</h1><p>collection可以继续细分为三种子接口<br>1：list：该集合内元素为有序可重复//<em>如数组链表</em><br>2：set：该集合内元素为无序不可重复//注意！<em>set在存储元素时并非顺序存储，而且重复元素不会进行添加</em><br>3：queue：该集合内元素为先进先出//<em>队列</em></p>
+<h2 id="list容器"><a href="#list容器" class="headerlink" title="list容器"></a>list容器</h2><p>list容器的三个重要容器类</p>
+<h3 id="ArrayList"><a href="#ArrayList" class="headerlink" title="ArrayList"></a>ArrayList</h3><p>动态数组类，内部数据结构由数组实现，该类实现了元素的快速随机访问，但是在删除或添加元素时需要移动大量的元素，因此不适合频繁的删除和增加</p>
+<h3 id="Vector"><a href="#Vector" class="headerlink" title="Vector"></a>Vector</h3><p>向量类，跟ArrayList基本一致，但有一点不同，Vector类的每一个方法都加了同步锁，好处是线程安全，坏处是访问速度要比ArrayList慢</p>
+<h3 id="LinkedList"><a href="#LinkedList" class="headerlink" title="LinkedList"></a>LinkedList</h3><p>链表类，内部数据结构是链表，该类实现了元素方便快速修改，但降低了访问速度，适合修改元素频繁的场景</p>
+<h2 id="set容器"><a href="#set容器" class="headerlink" title="set容器"></a>set容器</h2><p>set容器有两个重要的实现类</p>
+<h3 id="HashSet"><a href="#HashSet" class="headerlink" title="HashSet"></a>HashSet</h3><p>该类封装了HashMap，在向HashSet中添加元素时，先判断容器内是否已经有该元素，没有该元素才添加，这个过程是线程不安全的，并且不保证顺序不变</p>
+<h3 id="TreeSet"><a href="#TreeSet" class="headerlink" title="TreeSet"></a>TreeSet</h3><p>该类封装了TreeMap，在添加元素时会考虑顺序（这点与HashSet不同），并且同样不保证线程安全，不允许存在null</p>
+<h2 id="queue容器"><a href="#queue容器" class="headerlink" title="queue容器"></a>queue容器</h2><p>queue容器实现了队列的存储结构，遵循先进先出的原则</p>
+<h1 id="Map容器"><a href="#Map容器" class="headerlink" title="Map容器"></a>Map容器</h1><p>Map容器有两个重要的实现类</p>
+<h3 id="HashMap"><a href="#HashMap" class="headerlink" title="HashMap"></a>HashMap</h3><p>该类是由数组链表和红黑树实现的，数组中存放的是单链表的引用，也就是说数组的大小就是单链表的多少，当链表的长度大于8时，链表存储会改为红黑树存储。</p>
+<blockquote>
+<p>为什么要引入红黑树：在链表中查找元素时间复杂度为O(n)。而红黑树在查找时时间复杂度为O(logn)，在链表长度较少时没有影响，当链表长度过多时，引入红黑树存储能提高读取速度</p>
+</blockquote>
+<p>当元素想要添加进HashMap时，先调用hashCode()计算key值，根据key找到对应的链表，若链表中存在该值，则丢弃，若不存在，则添加进去</p>
+<h3 id="HashTable"><a href="#HashTable" class="headerlink" title="HashTable"></a>HashTable</h3><p>与HashMap基本类似，不同点在于HashTable是线程安全的，但会造成性能损失</p>
+<h1 id="Iterator"><a href="#Iterator" class="headerlink" title="Iterator"></a>Iterator</h1><p>Iterator是迭代器，它能在不知道容器内元素类型的情况下遍历所有元素，不属于Colletion和Map接口体系</p>
 
     </div>
 
@@ -275,7 +286,7 @@
   </li>
   <li class="post-copyright-link">
     <strong>本文链接：</strong>
-    <a href="http://example.com/2021/03/31/%E4%BB%80%E4%B9%88%E6%98%AF%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F%EF%BC%8C%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F%E7%9A%84%E4%BC%98%E7%82%B9%EF%BC%8C%E9%A5%BF%E6%B1%89%E5%92%8C%E6%87%92%E6%B1%89%E5%BC%8F%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F%E7%9A%84%E5%8C%BA%E5%88%AB/" title="什么是单例模式，单例模式的优点，饿汉和懒汉式单例模式的区别">http://example.com/2021/03/31/什么是单例模式，单例模式的优点，饿汉和懒汉式单例模式的区别/</a>
+    <a href="http://example.com/2021/04/03/Java%E5%AE%B9%E5%99%A8/" title="Java容器类">http://example.com/2021/04/03/Java容器/</a>
   </li>
   <li class="post-copyright-license">
     <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
@@ -292,13 +303,10 @@
         
     <div class="post-nav">
       <div class="post-nav-item">
-    <a href="/2021/03/31/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E7%AC%AC%E4%BA%8C%E7%AB%A0%20%E8%BF%9B%E7%A8%8B%E5%92%8C%E4%B8%AD%E6%96%AD/" rel="prev" title="操作系统进程">
-      <i class="fa fa-chevron-left"></i> 操作系统进程
+    <a href="/2021/04/03/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95%EF%BC%9AJava%E5%8D%95%E9%93%BE%E8%A1%A8/" rel="prev" title="数据结构与算法：Java单链表">
+      <i class="fa fa-chevron-left"></i> 数据结构与算法：Java单链表
     </a></div>
-      <div class="post-nav-item">
-    <a href="/2021/04/02/Java%E5%AD%A6%E4%B9%A0%EF%BC%9A%E5%BE%AE%E5%9E%8B%E5%8F%AF%E8%BF%90%E8%A1%8C%E7%A8%8B%E5%BA%8F%EF%BC%9A%E7%8C%9C%E6%95%B0%E5%AD%97%E5%B0%8F%E7%A8%8B%E5%BA%8F/" rel="next" title="Java学习：微型可运行程序：猜数字小程序">
-      Java学习：微型可运行程序：猜数字小程序 <i class="fa fa-chevron-right"></i>
-    </a></div>
+      <div class="post-nav-item"></div>
     </div>
       </footer>
     
@@ -357,7 +365,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BB%80%E4%B9%88%E6%98%AF%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F"><span class="nav-number">1.</span> <span class="nav-text">什么是单例模式</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F%E7%9A%84%E4%BC%98%E7%82%B9%E5%92%8C%E9%80%82%E7%94%A8%E5%9C%BA%E6%99%AF"><span class="nav-number">2.</span> <span class="nav-text">单例模式的优点和适用场景</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E9%A5%BF%E6%B1%89%E5%BC%8F%E5%92%8C%E6%87%92%E6%B1%89%E5%BC%8F%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F%E5%8C%BA%E5%88%AB"><span class="nav-number">3.</span> <span class="nav-text">饿汉式和懒汉式单例模式区别</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%94%B9%E8%BF%9B"><span class="nav-number">4.</span> <span class="nav-text">改进</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#collection%E5%AE%B9%E5%99%A8"><span class="nav-number">1.</span> <span class="nav-text">collection容器</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#list%E5%AE%B9%E5%99%A8"><span class="nav-number">1.1.</span> <span class="nav-text">list容器</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#ArrayList"><span class="nav-number">1.1.1.</span> <span class="nav-text">ArrayList</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Vector"><span class="nav-number">1.1.2.</span> <span class="nav-text">Vector</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#LinkedList"><span class="nav-number">1.1.3.</span> <span class="nav-text">LinkedList</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#set%E5%AE%B9%E5%99%A8"><span class="nav-number">1.2.</span> <span class="nav-text">set容器</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#HashSet"><span class="nav-number">1.2.1.</span> <span class="nav-text">HashSet</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#TreeSet"><span class="nav-number">1.2.2.</span> <span class="nav-text">TreeSet</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#queue%E5%AE%B9%E5%99%A8"><span class="nav-number">1.3.</span> <span class="nav-text">queue容器</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Map%E5%AE%B9%E5%99%A8"><span class="nav-number">2.</span> <span class="nav-text">Map容器</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#HashMap"><span class="nav-number">2.0.1.</span> <span class="nav-text">HashMap</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#HashTable"><span class="nav-number">2.0.2.</span> <span class="nav-text">HashTable</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Iterator"><span class="nav-number">3.</span> <span class="nav-text">Iterator</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 

@@ -190,6 +190,102 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/04/03/Java%E5%AE%B9%E5%99%A8/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="jjdlx">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/04/03/Java%E5%AE%B9%E5%99%A8/" class="post-title-link" itemprop="url">Java容器类</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2021-04-03 18:20:38" itemprop="dateCreated datePublished" datetime="2021-04-03T18:20:38+08:00">2021-04-03</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2021-04-04 09:53:32" itemprop="dateModified" datetime="2021-04-04T09:53:32+08:00">2021-04-04</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Java/" itemprop="url" rel="index"><span itemprop="name">Java</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Java/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/" itemprop="url" rel="index"><span itemprop="name">数据结构与算法</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>在Java中有着一种专门存放对象或对象引用的类，叫做容器类，或者叫集合类<br>容器类并不是特指某个类。按照一定的存储方式对对象进行存储的类都叫容器类。<br>而按照存储方式的不同可将容器类分为两种<br>1：实现collection接口的类：定义独立元素的序列<br>2：实现Map接口的类：定义成对的键值（key-value），并且map不能有重复的key</p>
+<h1 id="collection容器"><a href="#collection容器" class="headerlink" title="collection容器"></a>collection容器</h1><p>collection可以继续细分为三种子接口<br>1：list：该集合内元素为有序可重复//<em>如数组链表</em><br>2：set：该集合内元素为无序不可重复//注意！<em>set在存储元素时并非顺序存储，而且重复元素不会进行添加</em><br>3：queue：该集合内元素为先进先出//<em>队列</em></p>
+<h2 id="list容器"><a href="#list容器" class="headerlink" title="list容器"></a>list容器</h2><p>list容器的三个重要容器类</p>
+<h3 id="ArrayList"><a href="#ArrayList" class="headerlink" title="ArrayList"></a>ArrayList</h3><p>动态数组类，内部数据结构由数组实现，该类实现了元素的快速随机访问，但是在删除或添加元素时需要移动大量的元素，因此不适合频繁的删除和增加</p>
+<h3 id="Vector"><a href="#Vector" class="headerlink" title="Vector"></a>Vector</h3><p>向量类，跟ArrayList基本一致，但有一点不同，Vector类的每一个方法都加了同步锁，好处是线程安全，坏处是访问速度要比ArrayList慢</p>
+<h3 id="LinkedList"><a href="#LinkedList" class="headerlink" title="LinkedList"></a>LinkedList</h3><p>链表类，内部数据结构是链表，该类实现了元素方便快速修改，但降低了访问速度，适合修改元素频繁的场景</p>
+<h2 id="set容器"><a href="#set容器" class="headerlink" title="set容器"></a>set容器</h2><p>set容器有两个重要的实现类</p>
+<h3 id="HashSet"><a href="#HashSet" class="headerlink" title="HashSet"></a>HashSet</h3><p>该类封装了HashMap，在向HashSet中添加元素时，先判断容器内是否已经有该元素，没有该元素才添加，这个过程是线程不安全的，并且不保证顺序不变</p>
+<h3 id="TreeSet"><a href="#TreeSet" class="headerlink" title="TreeSet"></a>TreeSet</h3><p>该类封装了TreeMap，在添加元素时会考虑顺序（这点与HashSet不同），并且同样不保证线程安全，不允许存在null</p>
+<h2 id="queue容器"><a href="#queue容器" class="headerlink" title="queue容器"></a>queue容器</h2><p>queue容器实现了队列的存储结构，遵循先进先出的原则</p>
+<h1 id="Map容器"><a href="#Map容器" class="headerlink" title="Map容器"></a>Map容器</h1><p>Map容器有两个重要的实现类</p>
+<h3 id="HashMap"><a href="#HashMap" class="headerlink" title="HashMap"></a>HashMap</h3><p>该类是由数组链表和红黑树实现的，数组中存放的是单链表的引用，也就是说数组的大小就是单链表的多少，当链表的长度大于8时，链表存储会改为红黑树存储。</p>
+<blockquote>
+<p>为什么要引入红黑树：在链表中查找元素时间复杂度为O(n)。而红黑树在查找时时间复杂度为O(logn)，在链表长度较少时没有影响，当链表长度过多时，引入红黑树存储能提高读取速度</p>
+</blockquote>
+<p>当元素想要添加进HashMap时，先调用hashCode()计算key值，根据key找到对应的链表，若链表中存在该值，则丢弃，若不存在，则添加进去</p>
+<h3 id="HashTable"><a href="#HashTable" class="headerlink" title="HashTable"></a>HashTable</h3><p>与HashMap基本类似，不同点在于HashTable是线程安全的，但会造成性能损失</p>
+<h1 id="Iterator"><a href="#Iterator" class="headerlink" title="Iterator"></a>Iterator</h1><p>Iterator是迭代器，它能在不知道容器内元素类型的情况下遍历所有元素，不属于Colletion和Map接口体系</p>
+
+      
+    </div>
+
+    
+    
+    
+ 
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://example.com/2021/04/03/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95%EF%BC%9AJava%E5%8D%95%E9%93%BE%E8%A1%A8/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -213,10 +309,16 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
-              
 
-              <time title="创建时间：2021-04-03 10:30:19 / 修改时间：10:51:11" itemprop="dateCreated datePublished" datetime="2021-04-03T10:30:19+08:00">2021-04-03</time>
+              <time title="创建时间：2021-04-03 10:30:19" itemprop="dateCreated datePublished" datetime="2021-04-03T10:30:19+08:00">2021-04-03</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2021-04-04 09:53:34" itemprop="dateModified" datetime="2021-04-04T09:53:34+08:00">2021-04-04</time>
+              </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="far fa-folder"></i>
@@ -523,78 +625,6 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2021/03/31/hello-world/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.png">
-      <meta itemprop="name" content="jjdlx">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hexo">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2021/03/31/hello-world/" class="post-title-link" itemprop="url">Hello World</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              
-
-              <time title="创建时间：2021-03-31 13:18:58 / 修改时间：20:24:39" itemprop="dateCreated datePublished" datetime="2021-03-31T13:18:58+08:00">2021-03-31</time>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>Welcome to <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a target="_blank" rel="noopener" href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a target="_blank" rel="noopener" href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a target="_blank" rel="noopener" href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/writing.html">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/server.html">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/generating.html">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
-
-      
-    </div>
-
-    
-    
-    
- 
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
 
@@ -670,7 +700,7 @@
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">5</span>
+        <span class="site-state-item-count">6</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">
@@ -734,7 +764,7 @@
   </div>
 <div class="theme-info">
   <div class="powered-by"></div>
-  <span class="post-count">博客全站共3k字</span>
+  <span class="post-count">博客全站共3.7k字</span>
 </div>
         
 

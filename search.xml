@@ -25,22 +25,31 @@
       </tags>
   </entry>
   <entry>
-    <title>Hello World</title>
-    <url>/2021/03/31/hello-world/</url>
-    <content><![CDATA[<p>Welcome to <a href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/writing.html">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/server.html">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/generating.html">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
+    <title>Java容器类</title>
+    <url>/2021/04/03/Java%E5%AE%B9%E5%99%A8/</url>
+    <content><![CDATA[<p>在Java中有着一种专门存放对象或对象引用的类，叫做容器类，或者叫集合类<br>容器类并不是特指某个类。按照一定的存储方式对对象进行存储的类都叫容器类。<br>而按照存储方式的不同可将容器类分为两种<br>1：实现collection接口的类：定义独立元素的序列<br>2：实现Map接口的类：定义成对的键值（key-value），并且map不能有重复的key</p>
+<h1 id="collection容器"><a href="#collection容器" class="headerlink" title="collection容器"></a>collection容器</h1><p>collection可以继续细分为三种子接口<br>1：list：该集合内元素为有序可重复//<em>如数组链表</em><br>2：set：该集合内元素为无序不可重复//注意！<em>set在存储元素时并非顺序存储，而且重复元素不会进行添加</em><br>3：queue：该集合内元素为先进先出//<em>队列</em></p>
+<h2 id="list容器"><a href="#list容器" class="headerlink" title="list容器"></a>list容器</h2><p>list容器的三个重要容器类</p>
+<h3 id="ArrayList"><a href="#ArrayList" class="headerlink" title="ArrayList"></a>ArrayList</h3><p>动态数组类，内部数据结构由数组实现，该类实现了元素的快速随机访问，但是在删除或添加元素时需要移动大量的元素，因此不适合频繁的删除和增加</p>
+<h3 id="Vector"><a href="#Vector" class="headerlink" title="Vector"></a>Vector</h3><p>向量类，跟ArrayList基本一致，但有一点不同，Vector类的每一个方法都加了同步锁，好处是线程安全，坏处是访问速度要比ArrayList慢</p>
+<h3 id="LinkedList"><a href="#LinkedList" class="headerlink" title="LinkedList"></a>LinkedList</h3><p>链表类，内部数据结构是链表，该类实现了元素方便快速修改，但降低了访问速度，适合修改元素频繁的场景</p>
+<h2 id="set容器"><a href="#set容器" class="headerlink" title="set容器"></a>set容器</h2><p>set容器有两个重要的实现类</p>
+<h3 id="HashSet"><a href="#HashSet" class="headerlink" title="HashSet"></a>HashSet</h3><p>该类封装了HashMap，在向HashSet中添加元素时，先判断容器内是否已经有该元素，没有该元素才添加，这个过程是线程不安全的，并且不保证顺序不变</p>
+<h3 id="TreeSet"><a href="#TreeSet" class="headerlink" title="TreeSet"></a>TreeSet</h3><p>该类封装了TreeMap，在添加元素时会考虑顺序（这点与HashSet不同），并且同样不保证线程安全，不允许存在null</p>
+<h2 id="queue容器"><a href="#queue容器" class="headerlink" title="queue容器"></a>queue容器</h2><p>queue容器实现了队列的存储结构，遵循先进先出的原则</p>
+<h1 id="Map容器"><a href="#Map容器" class="headerlink" title="Map容器"></a>Map容器</h1><p>Map容器有两个重要的实现类</p>
+<h3 id="HashMap"><a href="#HashMap" class="headerlink" title="HashMap"></a>HashMap</h3><p>该类是由数组链表和红黑树实现的，数组中存放的是单链表的引用，也就是说数组的大小就是单链表的多少，当链表的长度大于8时，链表存储会改为红黑树存储。</p>
+<blockquote>
+<p>为什么要引入红黑树：在链表中查找元素时间复杂度为O(n)。而红黑树在查找时时间复杂度为O(logn)，在链表长度较少时没有影响，当链表长度过多时，引入红黑树存储能提高读取速度</p>
+</blockquote>
+<p>当元素想要添加进HashMap时，先调用hashCode()计算key值，根据key找到对应的链表，若链表中存在该值，则丢弃，若不存在，则添加进去</p>
+<h3 id="HashTable"><a href="#HashTable" class="headerlink" title="HashTable"></a>HashTable</h3><p>与HashMap基本类似，不同点在于HashTable是线程安全的，但会造成性能损失</p>
+<h1 id="Iterator"><a href="#Iterator" class="headerlink" title="Iterator"></a>Iterator</h1><p>Iterator是迭代器，它能在不知道容器内元素类型的情况下遍历所有元素，不属于Colletion和Map接口体系</p>
 ]]></content>
+      <categories>
+        <category>Java</category>
+        <category>数据结构与算法</category>
+      </categories>
   </entry>
   <entry>
     <title>什么是单例模式，单例模式的优点，饿汉和懒汉式单例模式的区别</title>
@@ -59,6 +68,20 @@
 ]]></content>
       <categories>
         <category>设计模式</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>数据结构与算法：Java单链表</title>
+    <url>/2021/04/03/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95%EF%BC%9AJava%E5%8D%95%E9%93%BE%E8%A1%A8/</url>
+    <content><![CDATA[<p> 首先我们要知道，在Java中是没有指针的概念的<br> 而Java虽然没有指针，但有着引用<br> 利用引用一样可以制造链表</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Node</span></span>&#123;</span><br><span class="line">Node next=<span class="keyword">null</span>;<span class="comment">//节点被创建的同时创建对象引用，但没申请对象空间</span></span><br><span class="line"><span class="keyword">int</span> data;</span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="title">Node</span><span class="params">(<span class="keyword">int</span> n)</span>data</span>=n;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>每一个结点都有一个对象引用，这使得链表在逻辑上是连续的，不用考虑物理顺序<br>通常情况下，链表有一个head，用来标识链表的起始位置，head并不作为链表的结点，head只是一个引用，head的引用对象是链表的第一个结点。<br>如：head.data==第一个结点.data;<br>我们接下来创建链表类，链表由结点构成</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">LinkList</span></span>&#123;</span><br><span class="line">    Node head=<span class="keyword">null</span>;<span class="comment">//每个链表都有头结点</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">addNode</span><span class="params">(<span class="keyword">int</span> e)</span></span>&#123;</span><br><span class="line"><span class="comment">//给链表增加结点的方法，这里只示例尾部结点添加，其他插入也大同小异</span></span><br><span class="line">        Node n=<span class="keyword">new</span> Node(e);</span><br><span class="line">        Node tmp=head;<span class="comment">//head引用不能动，因为head标识链表的起始位置，申请一个tmp引用来进行操作</span></span><br><span class="line">        <span class="keyword">if</span>(head==<span class="keyword">null</span>)&#123;head=n;<span class="keyword">return</span>;&#125;<span class="comment">//若链表为空，则直接添加在第一个结点</span></span><br><span class="line">        <span class="keyword">while</span>(tmp.next!=<span class="keyword">null</span>)&#123;</span><br><span class="line">            tmp=tmp.next;<span class="comment">//将tmp引用向后移,一直移到最后一个结点</span></span><br><span class="line">        &#125;</span><br><span class="line">        tmp.next=n;<span class="comment">//在最后一个结点后添加新结点</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">delNode</span><span class="params">(<span class="keyword">int</span> n)</span></span>&#123;</span><br><span class="line">        <span class="comment">//删除指定位置的结点，第一个结点是head指向的结点</span></span><br><span class="line">        Node pre=head;</span><br><span class="line">        <span class="keyword">if</span>(n==<span class="number">1</span>)&#123;head=head.next;<span class="keyword">return</span>;&#125;<span class="comment">//</span></span><br><span class="line">        <span class="keyword">int</span> num=<span class="number">2</span>;</span><br><span class="line">        <span class="keyword">while</span>(num&lt;n)&#123;</span><br><span class="line">            pre=pre.next;<span class="comment">//pre指向被删除的前一个结点</span></span><br><span class="line">            num++;</span><br><span class="line">        &#125;</span><br><span class="line">        pre.next=pre.next.next;<span class="comment">//删除结点</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">print</span><span class="params">()</span></span>&#123;<span class="comment">//输出链表</span></span><br><span class="line">        Node tmp=head;</span><br><span class="line">        <span class="keyword">if</span>(tmp==<span class="keyword">null</span>)&#123;System.out.print(<span class="string">&quot;null&quot;</span>);<span class="keyword">return</span>;&#125;</span><br><span class="line">        <span class="keyword">do</span>&#123;</span><br><span class="line">        System.out.print(tmp.data+<span class="string">&quot; &quot;</span>);</span><br><span class="line">        tmp=tmp.next;&#125;<span class="keyword">while</span>(tmp.next!=<span class="keyword">null</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>链表操作关键在于两处<br>1：head始终代表链表的起始位置<br>2：如果当前引用的结点为空，则空结点不能有下一个结点，否则会报错</p>
+]]></content>
+      <categories>
+        <category>数据结构与算法</category>
+        <category>Java</category>
       </categories>
   </entry>
   <entry>
@@ -83,20 +106,6 @@
 ]]></content>
       <categories>
         <category>操作系统</category>
-      </categories>
-  </entry>
-  <entry>
-    <title>数据结构与算法：Java单链表</title>
-    <url>/2021/04/03/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95%EF%BC%9AJava%E5%8D%95%E9%93%BE%E8%A1%A8/</url>
-    <content><![CDATA[<p> 首先我们要知道，在Java中是没有指针的概念的<br> 而Java虽然没有指针，但有着引用<br> 利用引用一样可以制造链表</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Node</span></span>&#123;</span><br><span class="line">Node next=<span class="keyword">null</span>;<span class="comment">//节点被创建的同时创建对象引用，但没申请对象空间</span></span><br><span class="line"><span class="keyword">int</span> data;</span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="title">Node</span><span class="params">(<span class="keyword">int</span> n)</span>data</span>=n;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>每一个结点都有一个对象引用，这使得链表在逻辑上是连续的，不用考虑物理顺序<br>通常情况下，链表有一个head，用来标识链表的起始位置，head并不作为链表的结点，head只是一个引用，head的引用对象是链表的第一个结点。<br>如：head.data==第一个结点.data;<br>我们接下来创建链表类，链表由结点构成</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">LinkList</span></span>&#123;</span><br><span class="line">    Node head=<span class="keyword">null</span>;<span class="comment">//每个链表都有头结点</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">addNode</span><span class="params">(<span class="keyword">int</span> e)</span></span>&#123;</span><br><span class="line"><span class="comment">//给链表增加结点的方法，这里只示例尾部结点添加，其他插入也大同小异</span></span><br><span class="line">        Node n=<span class="keyword">new</span> Node(e);</span><br><span class="line">        Node tmp=head;<span class="comment">//head引用不能动，因为head标识链表的起始位置，申请一个tmp引用来进行操作</span></span><br><span class="line">        <span class="keyword">if</span>(head==<span class="keyword">null</span>)&#123;head=n;<span class="keyword">return</span>;&#125;<span class="comment">//若链表为空，则直接添加在第一个结点</span></span><br><span class="line">        <span class="keyword">while</span>(tmp.next!=<span class="keyword">null</span>)&#123;</span><br><span class="line">            tmp=tmp.next;<span class="comment">//将tmp引用向后移,一直移到最后一个结点</span></span><br><span class="line">        &#125;</span><br><span class="line">        tmp.next=n;<span class="comment">//在最后一个结点后添加新结点</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">delNode</span><span class="params">(<span class="keyword">int</span> n)</span></span>&#123;</span><br><span class="line">        <span class="comment">//删除指定位置的结点，第一个结点是head指向的结点</span></span><br><span class="line">        Node pre=head;</span><br><span class="line">        <span class="keyword">if</span>(n==<span class="number">1</span>)&#123;head=head.next;<span class="keyword">return</span>;&#125;<span class="comment">//</span></span><br><span class="line">        <span class="keyword">int</span> num=<span class="number">2</span>;</span><br><span class="line">        <span class="keyword">while</span>(num&lt;n)&#123;</span><br><span class="line">            pre=pre.next;<span class="comment">//pre指向被删除的前一个结点</span></span><br><span class="line">            num++;</span><br><span class="line">        &#125;</span><br><span class="line">        pre.next=pre.next.next;<span class="comment">//删除结点</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">print</span><span class="params">()</span></span>&#123;<span class="comment">//输出链表</span></span><br><span class="line">        Node tmp=head;</span><br><span class="line">        <span class="keyword">if</span>(tmp==<span class="keyword">null</span>)&#123;System.out.print(<span class="string">&quot;null&quot;</span>);<span class="keyword">return</span>;&#125;</span><br><span class="line">        <span class="keyword">do</span>&#123;</span><br><span class="line">        System.out.print(tmp.data+<span class="string">&quot; &quot;</span>);</span><br><span class="line">        tmp=tmp.next;&#125;<span class="keyword">while</span>(tmp.next!=<span class="keyword">null</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>链表操作关键在于两处<br>1：head始终代表链表的起始位置<br>2：如果当前引用的结点为空，则空结点不能有下一个结点，否则会报错</p>
-]]></content>
-      <categories>
-        <category>数据结构与算法</category>
-        <category>Java</category>
       </categories>
   </entry>
 </search>
